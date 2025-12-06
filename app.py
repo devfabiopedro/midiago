@@ -8,10 +8,10 @@ import os
 import asyncio
 import re
 
-app = FastAPI(title="FP Video Downloader")
+app = FastAPI(title="MidiaGo")
 
 # Diretório dos templates
-templates = Jinja2Templates(directory="src/templates")
+templates = Jinja2Templates(directory="templates")
 
 # Cria o diretório para os downloads temporários, caso não exista.
 DOWNLOAD_DIR = "downloads"
