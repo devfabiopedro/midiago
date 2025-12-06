@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta author="Fábio S. Pedro">
+    <link rel="stylesheet" href="{{ url_for('static', path='output.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"/>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', path='url_8257840.png') }}">
+    <title>Baixador de Vídeos e Músicas</title>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container bg-white mx-auto p-8 m-10 sm:rounded-lg sm:drop-shadow-sm">
+        <h1 class="text-center text-4xl text-gray-500 font-bold">Baixar Vídeos e Músicas</h1>
+        <h1 class="text-center text-sm text-gray-300 font-bold">X (Twitter) | Youtube | Linkedin | Tenor</h1>
+        <p class="mb-2 mt-8 text-center text-gray-400">Cole a URL abaixo<i class="fa-solid fa-link ml-2"></i></p>
+        
+        <!-- FORMULÁRIO INTEIRO -->
+        <form class="flex flex-col items-center gap-4 text-center" method="post" action="/baixar">
+
+            <input class="bg-gray-100 rounded-md border border-gray-300 min-w-xs md:min-w-lg p-2" 
+                   type="url" name="url" placeholder="URL do vídeo ou música" required>
+
+            <!-- SELEÇÃO MP4 / MP3 -->
+            <div class="flex font-medium justify-center pt-3">
+                <div class="mx-6">
+                    <input class="accent-gray-500" type="radio" id="video" name="tipo" value="mp4" checked />
+                    <label class="text-gray-400" for="video">MP4<i class="fa-regular fa-file-video text-xl"></i></label>
+                </div>
+                <div class="mx-6">
+                    <input class="accent-gray-500" type="radio" id="musica" name="tipo" value="mp3" />
+                    <label class="text-gray-400" for="musica">MP3<i class="fa-regular fa-file-audio text-xl"></i></label>
+                </div>
+            </div>
+
+        <!-- MENSAGENS DE ERRO OU SUCESSO -->
+        {% if erro %}
+        <div class="flex justify-center mt-10">
+            <p class="text-2xl text-red-600 p-1 inline-block">{{ erro }}</p>
+        </div>
+        {% endif %}
+        
+        {% if mensagem %}
+        <div class="flex justify-center mt-10">
+            <p class="text-2xl text-green-800 p-1 inline-block" style="white-space: pre-line;">{{ mensagem }}</p>
+        </div>
+        {% endif %}
+
+        <!-- BOTÃO DE DOWNLOAD DA MÍDIA -->
+        {% if download_url %}
+            <div class="flex justify-center mt-4">
+                <a href="{{ download_url }}" class="bg-green-500 rounded w-xs p-2 text-center text-green-900 transition-colors hover:bg-green-600 text-xl inline-block shadow-sm shadow-green-900">
+                Clique para baixar <i class="fa-solid fa-download"></i>
+                </a>
+            </div>
+        {% endif %}
+
+
+        
+        <!-- BOTÃO DE BAIXAR OU VOLTAR -->
+        {% if not download_url %}
+            <button class="bg-red-400 text-white font-bold p-2 mt-8 w-xs rounded-md shadow-sm shadow-black cursor-pointer transition-colors hover:bg-red-500"
+            type="submit">
+            Baixar<i class="fa-solid fa-download pl-2"></i>
+            </button>
+        {% else %}    
+            <a href="/" id="btn-voltar"
+            class="bg-gray-300 text-gray-600 font-bold p-2 mt-10 w-xs rounded-md shadow-sm shadow-black cursor-pointer transition-colors hover:bg-gray-400">
+                Voltar
+            </a>        
+        {% endif %}    
+        </form>
+
+    </div>
+    
+    <p class="fixed bottom-2 right-2 text-xs text-gray-300">Fábio S. Pedro - 2025.</p>
+</body>
+</html>
