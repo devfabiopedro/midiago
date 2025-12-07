@@ -1,6 +1,6 @@
 from flask import Flask
-from .config import Config
-from .routes import bp
+from apps.config import Config
+from apps.routes import bp
 
 
 def create_app():
